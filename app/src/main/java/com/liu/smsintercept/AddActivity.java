@@ -41,19 +41,22 @@ public class AddActivity extends AppCompatActivity {
         //获取数据
         String address=et_address.getText().toString().trim();
         String reason=et_reason.getText().toString().trim();
-        //开始事务
-        db.beginTransaction();
-        //插入数据
-        try{
-            ContentValues values=new ContentValues();
-            values.put("address",address);
-            values.put("reason",reason);
-            db.insert("blacklist", null, values);
-            db.setTransactionSuccessful();      //事务执行成功
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();        //结束事务
+        //号码不能为空
+        if(address!=null&&!"".equals(address)){
+            //开始事务
+            db.beginTransaction();
+            //插入数据
+            try{
+                ContentValues values=new ContentValues();
+                values.put("address",address);
+                values.put("reason",reason);
+                db.insert("blacklist", null, values);
+                db.setTransactionSuccessful();      //事务执行成功
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                db.endTransaction();        //结束事务
+            }
         }
     }
 }
