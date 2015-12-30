@@ -8,6 +8,9 @@
 * 删除黑名单内的号码
 
 ###截图
+* 短信拦截
+
+	![image](https://github.com/xaoyao/SmsIntercept/blob/master/screenshot/Image6.png)
 * 主界面
 
 
