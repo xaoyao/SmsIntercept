@@ -69,12 +69,26 @@ public class DBUtil {
     }
 
     /**
-     *通过id删除blacklist
+     * 通过id删除blacklist
+     * @param context
      * @param id
+     * @return
      */
-    public static void deleteBlacklistById( Context context,int id){
+    public static boolean deleteBlacklistById( Context context,int id){
         BlacklistDatabaseHelper dbHelper=new BlacklistDatabaseHelper(context);
         SQLiteDatabase db=dbHelper.getWritableDatabase();
-        db.delete("blacklist","id=?",new String[]{id+""});
+        db.beginTransaction();
+        try{
+            db.delete("blacklist","id=?",new String[]{id+""});
+            db.setTransactionSuccessful();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+        }
+
+        return false;
     }
+
 }

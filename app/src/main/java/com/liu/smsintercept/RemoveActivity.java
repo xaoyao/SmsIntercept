@@ -36,9 +36,12 @@ public class RemoveActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //删除数据
-                    DBUtil.deleteBlacklistById(RemoveActivity.this,id);
+                    if(DBUtil.deleteBlacklistById(RemoveActivity.this,id)){
+                        Toast.makeText(RemoveActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(RemoveActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
+                    }
 
-                    Toast.makeText(RemoveActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RemoveActivity.this, MainActivity.class));
                 }
             });
