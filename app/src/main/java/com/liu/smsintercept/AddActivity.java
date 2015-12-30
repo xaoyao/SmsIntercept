@@ -27,8 +27,11 @@ public class AddActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addBlacklist();
-                Toast.makeText(AddActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                if(addBlacklist()){
+                    Toast.makeText(AddActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(AddActivity.this,"添加失败",Toast.LENGTH_SHORT).show();
+                }
                 startActivity(new Intent(AddActivity.this, MainActivity.class));
             }
         });
@@ -37,7 +40,7 @@ public class AddActivity extends AppCompatActivity {
     /**
      * 添加到数据库
      */
-    private void addBlacklist(){
+    private boolean addBlacklist(){
         BlacklistDatabaseHelper dbHelper=new BlacklistDatabaseHelper(this);
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         //获取数据
@@ -51,14 +54,16 @@ public class AddActivity extends AppCompatActivity {
             try{
                 ContentValues values=new ContentValues();
                 values.put("address",address);
-                values.put("reason",reason);
+                values.put("reason", reason);
                 db.insert("blacklist", null, values);
                 db.setTransactionSuccessful();      //事务执行成功
+                return true;
             }catch (Exception e){
                 e.printStackTrace();
             }finally {
                 db.endTransaction();        //结束事务
             }
         }
+        return false;
     }
 }
