@@ -32,6 +32,9 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 添加到数据库
+     */
     private void addBlacklist(){
         BlacklistDatabaseHelper dbHelper=new BlacklistDatabaseHelper(this);
         SQLiteDatabase db=dbHelper.getWritableDatabase();

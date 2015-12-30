@@ -25,10 +25,11 @@ public class SmsReceiver extends BroadcastReceiver{
             //获取短信内容
             String body=sms.getMessageBody();
             Log.d("debug_sms",address+"   "+body);
-            if("110".equals(address)){
+            //判断数据库中是否存在本号码
+            if(DBUtil.findBlacklistByAddress(context,address)!=null){
                 //拦截广播
                 abortBroadcast();
-                Toast.makeText(context,"已拦截短信",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"已拦截"+address+"的短信",Toast.LENGTH_SHORT).show();
             }
         }
 
