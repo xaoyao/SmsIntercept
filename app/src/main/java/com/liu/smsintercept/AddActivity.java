@@ -27,11 +27,13 @@ public class AddActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //添加数据，判断是否成功
                 if(addBlacklist()){
                     Toast.makeText(AddActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(AddActivity.this,"添加失败",Toast.LENGTH_SHORT).show();
                 }
+                //回到主界面
                 startActivity(new Intent(AddActivity.this, MainActivity.class));
             }
         });
