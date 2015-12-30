@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddActivity extends AppCompatActivity {
     private Button btn_submit;
@@ -27,7 +28,8 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBlacklist();
-                startActivity(new Intent(AddActivity.this,MainActivity.class));
+                Toast.makeText(AddActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AddActivity.this, MainActivity.class));
             }
         });
     }
