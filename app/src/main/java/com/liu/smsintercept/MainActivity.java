@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
      * 初始化BlackLists
      */
     private void initBlacklists(){
+        blacklists=new ArrayList<>();
         Blacklist blacklist;
         BlacklistDatabaseHelper dbHelper=new BlacklistDatabaseHelper(this);
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         //从数据库中查询所有的黑名单号码
         Cursor cursor=db.rawQuery("select * from blacklist", null);
         while (cursor.moveToNext()){
-            blacklists=new ArrayList<>();
             blacklist=new Blacklist();
             blacklist.setId(cursor.getInt(cursor.getColumnIndex("id")));
             blacklist.setAddress(cursor.getString(cursor.getColumnIndex("address")));

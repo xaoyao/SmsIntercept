@@ -1,6 +1,7 @@
 package com.liu.smsintercept;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBlacklist();
+                startActivity(new Intent(AddActivity.this,MainActivity.class));
             }
         });
     }
