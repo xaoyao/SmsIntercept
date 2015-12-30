@@ -68,4 +68,12 @@ public class MainActivity extends AppCompatActivity {
 //        //把得到的每条数据放入List中
 //        blacklists.add(blacklist);
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //更新数据
+        this.initBlacklists();
+        lv_blacklists.setAdapter(new BlacklistsAdapter(this, R.layout.blacklist_item, blacklists));
+    }
 }
