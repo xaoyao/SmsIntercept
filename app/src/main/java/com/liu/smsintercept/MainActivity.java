@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_add;
+    private ListView lv_blacklists;
     private List<Blacklist> blacklists;
 
     @Override
@@ -21,8 +23,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //add按钮点击事件
+        lv_blacklists= (ListView) findViewById(R.id.lv_blacklists);
         btn_add= (Button) findViewById(R.id.btn_add);
+
+        //初始化Blacklists
+        this.initBlacklists();
+        //显示数据
+        lv_blacklists.setAdapter(new BlacklistsAdapter(this,R.layout.blacklist_item,blacklists));
+
+        //add按钮点击事件
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +55,17 @@ public class MainActivity extends AppCompatActivity {
             blacklist.setId(cursor.getInt(cursor.getColumnIndex("id")));
             blacklist.setAddress(cursor.getString(cursor.getColumnIndex("address")));
             blacklist.setReason(cursor.getString(cursor.getColumnIndex("reason")));
+            //把得到的每条数据放入List中
             blacklists.add(blacklist);
         }
+
+
+//        blacklists=new ArrayList<>();
+//        blacklist=new Blacklist();
+//        blacklist.setId(1);
+//        blacklist.setAddress("123");
+//        blacklist.setReason("123");
+//        //把得到的每条数据放入List中
+//        blacklists.add(blacklist);
     }
 }
